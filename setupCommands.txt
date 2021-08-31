@@ -9,4 +9,7 @@ npm install @discordjs/builders @discordjs/rest discord-api-types
 "discord-akairo": "github:SkyBlockDev/discord-akairo"
 //ensuite dans la console entrer
 npm i
+
+npm i mongoose
+
 //before pushing anything, check that the config.json and the node_modules files are in the .gitignore
