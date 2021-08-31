@@ -1,4 +1,5 @@
-const { AkairoClient, CommandHandler } = require('discord-akairo');
+const {embed} = require("../util/functions");
+const { AkairoClient, CommandHandler, ListenerHandler } = require('discord-akairo');
 
 module.exports = class GotoClient extends AkairoClient {
     constructor(config = {}) {
@@ -14,7 +15,7 @@ module.exports = class GotoClient extends AkairoClient {
                     status: 'dnd',
                     activities:[
                         {
-                            name: 'unsuspicious',
+                            name: 'YOU',
                             type:'WATCHING',
                             url:'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
                         }
@@ -32,6 +33,17 @@ module.exports = class GotoClient extends AkairoClient {
             directory: './src/commands/'
         });
 
+        this.listenerHandler = new ListenerHandler(this, {
+            directory: './src/listeners/'
+        });
+
+        //this.client.functions.embed()
+        this.functions ={
+            embed: embed
+        }
+
         this.commandHandler.loadAll();
+        this.commandHandler.useListenerHandler(this.listenerHandler);
+        this.listenerHandler.loadAll();
     }
 }
