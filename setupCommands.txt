@@ -3,12 +3,6 @@
 node -v //check your version of node, should be higher than V16.6.0
 
 npm install discord.js
-npm install @discordjs/builders @discordjs/rest discord-api-types
-
-//pour akairo, aller dans package.json et taper
-"discord-akairo": "github:SkyBlockDev/discord-akairo"
-//ensuite dans la console entrer
-npm i
 
 npm i mongoose
 

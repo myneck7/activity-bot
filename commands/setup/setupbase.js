@@ -1,3 +1,5 @@
+const {MESSAGES} = require('../../util/constants');
+
 module.exports.run = (client, message, args) => {
     let c = message.guild.channels.cache.find(c => c.name == "activity" && c.type == "GUILD_CATEGORY")
 
@@ -5,14 +7,11 @@ module.exports.run = (client, message, args) => {
         parent: c
     });
 
+    message.guild.channels.create('logs', {
+        parent: c
+    });
+
     return message.reply('examination chamber renovated');
 };
 
-module.exports.help = {
-    name:"setupbase",
-    aliases: ["setupbase", "setupB", "setup3"],
-    description:"setup the base channel",
-    cooldown: 5,
-    usage: '',
-    args: false
-};
+module.exports.help = MESSAGES.COMMANDS.SETUP.SETUPBASE;

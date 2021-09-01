@@ -1,4 +1,5 @@
 const {MessageEmbed} = require("discord.js");
+const {MESSAGES} = require('../../util/constants');
 
 module.exports.run = (client, message, args) => {
 
@@ -11,11 +12,4 @@ module.exports.run = (client, message, args) => {
         ]});
 };
 
-module.exports.help = {
-    name:"userinfo",
-    aliases: ["userinfo"],
-    description:"send the user infos",
-    cooldown: 1,
-    usage: "[user to mention]",
-    args: true
-};
+module.exports.help = MESSAGES.COMMANDS.MISC.USERINFO;

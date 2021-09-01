@@ -1,3 +1,5 @@
+const {MESSAGES} = require('../../util/constants');
+
 module.exports.run = (client, message, args) => {
     message.guild.roles.create({
         name: 'Spanish Inquisition',
@@ -8,11 +10,4 @@ module.exports.run = (client, message, args) => {
     return message.reply('Nobody expect the spanish inquisition');
 };
 
-module.exports.help = {
-    name:"setuprole",
-    aliases: ["setuprole", "setupr", "setup1"],
-    description:"setup the role",
-    cooldown: 5,
-    usage: '',
-    args: false
-};
+module.exports.help = MESSAGES.COMMANDS.SETUP.SETUPROLE;

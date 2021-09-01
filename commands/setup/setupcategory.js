@@ -1,3 +1,5 @@
+const {MESSAGES} = require('../../util/constants');
+
 module.exports.run = (client, message, args) => {
     let role = message.guild.roles.cache.find(role => role.name === "Spanish Inquisition");
     message.guild.channels.create('activity', {
@@ -17,11 +19,4 @@ module.exports.run = (client, message, args) => {
     return message.reply('Interrogation building finished');
 };
 
-module.exports.help = {
-    name:"setupcategory",
-    aliases: ["setupcategory", "setupc", "setup2"],
-    description:"setup the category",
-    cooldown: 5,
-    usage: '',
-    args: false
-};
+module.exports.help = MESSAGES.COMMANDS.SETUP.SETUPCATEGORY;

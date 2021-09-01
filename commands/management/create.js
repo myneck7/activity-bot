@@ -1,8 +1,12 @@
 const {MessageEmbed} = require("discord.js");
+const {MESSAGES} = require('../../util/constants');
+
 module.exports.run = (client, message, args) => {
-    let c = message.guild.channels.cache.find(c => c.name == "activity" && c.type == "GUILD_CATEGORY")
+    let c = message.guild.channels.cache.find(c => c.name == "activity" && c.type == "GUILD_CATEGORY");
     let role = message.guild.roles.cache.find(role => role.name === "Spanish Inquisition");
     let user = message.mentions.users.first();
+
+    if(!user) return;
 
     message.guild.channels.create(user.username , {
         parent: c,
@@ -22,19 +26,23 @@ module.exports.run = (client, message, args) => {
         ]
     });
 
+    const embedLogs =
+            new MessageEmbed().setColor('0xff0000')
+                .setTitle(`${user.username} (${user.id})`)
+                .setThumbnail(user.avatarURL())
+                .setDescription(`**Action** : channel creation`)
+                .setTimestamp()
+                .setFooter(message.author.username, message.author.avatarURL());
+
+    //const l = message.guild.channels.cache.find(l => l.name == "logs").id;
+    client.channels.cache.get('882540386906693722').send({ embeds: [embedLogs]});
 
     return message.channel.send({ embeds: [
-            new MessageEmbed().setColor('0xff0000')
+            new MessageEmbed().setColor('GREEN')
                 .setTitle(`${user.username}`)
                 .setThumbnail(user.displayAvatarURL())
-                .setDescription(`Creation date : ${user.createdAt}`)
+                .setDescription(`Channel creation done`)
         ]});
 };
 
-module.exports.help = {
-    name:"create",
-    aliases: ["create", "c"],
-    description:"create a channel for a user",
-    cooldown: 5,
-    args: true
-};
+module.exports.help = MESSAGES.COMMANDS.MANAGEMENT.CREATE;
