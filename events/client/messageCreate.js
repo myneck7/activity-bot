@@ -1,11 +1,12 @@
-const { PREFIX } = require('../../util/config.json');
-
 const { Collection } = require('discord.js');
 
-module.exports = (client, message) => {
-    if(!message.content.startsWith(PREFIX) || message.author.bot) return;
+module.exports = async (client, message) => {
+    const settings = await client.getGuild(message.guild.id);
 
-    const args = message.content.slice(PREFIX.length).split(/ +/);
+    if(!message.content.startsWith(settings.prefix) || message.author.bot) return;
+
+
+    const args = message.content.slice(settings.prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
 
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(commandName));
@@ -16,7 +17,7 @@ module.exports = (client, message) => {
         let noArgs = `missing arguments ${message.author}`;
 
         if(command.help.usage) {
-            noArgs += `\nHow to use : \`${PREFIX}${command.help.name} ${command.help.usage}\``;
+            noArgs += `\nHow to use : \`${settings.prefix}${command.help.name} ${command.help.usage}\``;
         }
 
         return message.channel.send(noArgs);
@@ -44,5 +45,5 @@ module.exports = (client, message) => {
     tStamps.set(message.author.id, timeNow);
     setTimeout(() => tStamps.delete(message.author.id), cdAmount);
 
-    command.run(client, message, args);
+    command.run(client, message, args, settings);
 }

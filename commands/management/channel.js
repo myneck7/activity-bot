@@ -45,4 +45,4 @@ module.exports.run = (client, message, args) => {
         ]});
 };
 
-module.exports.help = MESSAGES.COMMANDS.MANAGEMENT.CREATE;
+module.exports.help = MESSAGES.COMMANDS.MANAGEMENT.CHANNEL;

@@ -57,19 +57,59 @@ const MESSAGES = {
                 name:"eval",
                 aliases: ["eval"],
                 category:'dev',
-                description:"renvoie un code js testé",
+                description:"send js code ",
                 cooldown: 1,
                 usage: '[code_to_test]',
+                roles: true,
+                args: true
+            },
+            CONFIG:{
+                name:"config",
+                aliases: ["config"],
+                category:'dev',
+                description:"modification of the db",
+                cooldown: 5,
+                usage: '[key] [value]',
                 roles: true,
                 args: true
             }
         },
         MANAGEMENT:{
-            CREATE:{
-                name:"create",
-                aliases: ["create", "c"],
+            CHANNEL:{
+                name:"channel",
+                aliases: ["channel"],
                 category:'management',
                 description:"create a channel for a user",
+                cooldown: 5,
+                usage:'[@user]',
+                roles: true,
+                args: true
+            },
+            ADDPLAYER:{
+                name:"addplayer",
+                aliases: ["addplayer"],
+                category:'management',
+                description:"Add a player to the guild",
+                cooldown: 5,
+                usage:'[@user]',
+                roles: true,
+                args: true
+            },
+            ADDSCORE:{
+                name:"addscore",
+                aliases: ["addscore"],
+                category:'management',
+                description:"update the score of a player",
+                cooldown: 5,
+                usage:'[@user]',
+                roles: true,
+                args: true
+            },
+            MINUSSCORE:{
+                name:"minusscore",
+                aliases: ["minusscore"],
+                category:'management',
+                description:"update the score of a player",
                 cooldown: 5,
                 usage:'[@user]',
                 roles: true,

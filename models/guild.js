@@ -8,10 +8,6 @@ const guildSchema = mongoose.Schema({
     prefix:{
         "type":String,
         "default": defaults.prefix
-    },
-    logChannel:{
-        "type":String,
-        "default": defaults.logChannel
     }
 });
 
