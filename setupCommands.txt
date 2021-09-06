@@ -6,4 +6,7 @@ npm install discord.js
 
 npm i mongoose
 
+npm install cron
+
+
 //before pushing anything, check that the config.json and the node_modules files are in the .gitignore

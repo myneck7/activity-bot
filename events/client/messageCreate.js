@@ -1,7 +1,7 @@
 const { Collection } = require('discord.js');
 
 module.exports = async (client, message) => {
-    const settings = await client.getGuild(message.guild.id);
+    const settings = await client.getGuild(message.guild);
 
     if(!message.content.startsWith(settings.prefix) || message.author.bot) return;
 
@@ -23,7 +23,7 @@ module.exports = async (client, message) => {
         return message.channel.send(noArgs);
     }
 
-    if(command.help.roles && !message.member.roles.cache.some(role => role.name === 'Spanish Inquisition')) return message.reply('you don\'t have the permissions to use this command');
+    if(command.help.roles && !message.member.roles.cache.some(role => role.name === 'Activity Admin')) return message.reply('you don\'t have the permissions to use this command');
 
     if(!client.cooldowns.has(command.help.name)){
         client.cooldowns.set(command.help.name, new Collection());

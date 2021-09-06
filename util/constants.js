@@ -6,17 +6,37 @@ const MESSAGES = {
                 aliases: ["ping"],
                 category:'misc',
                 description:"send pong",
-                cooldown: 1,
+                cooldown: 5,
                 usage: '',
                 roles: true,
                 args: false
             },
-            EMBED:{
-                name:"embed",
-                aliases: ["embed"],
+            ME:{
+                name:"me",
+                aliases: ["me"],
                 category:'misc',
-                description:"send an embed",
-                cooldown: 1,
+                description:"send user info",
+                cooldown: 5,
+                usage: '',
+                roles: false,
+                args: false
+            },
+            ACTIVITY:{
+                name:"activity",
+                aliases: ["activity"],
+                category:'misc',
+                description:"send activity list",
+                cooldown: 5,
+                usage: '',
+                roles: false,
+                args: false
+            },
+            LEADERBOARD:{
+                name:"leaderboard",
+                aliases: ["leaderboard"],
+                category:'misc',
+                description:"send player list",
+                cooldown: 5,
                 usage: '',
                 roles: false,
                 args: false
@@ -26,7 +46,7 @@ const MESSAGES = {
                 aliases: ["help", "h"],
                 category:'misc',
                 description:"send a list of commands or information about one",
-                cooldown: 1,
+                cooldown: 5,
                 usage: '[command_name]',
                 roles: false,
                 args: false
@@ -36,40 +56,8 @@ const MESSAGES = {
                 aliases: ["userinfo"],
                 category:'misc',
                 description:"send the user infos",
-                cooldown: 1,
-                usage: "[user]",
-                roles: true,
-                args: true
-            }
-        },
-        DEV:{
-            RESTART:{
-                name:"restart",
-                aliases: ["restart"],
-                category:'dev',
-                description:"Restart the bot",
-                cooldown: 1,
-                usage: '',
-                roles: true,
-                args: false
-            },
-            EVAL:{
-                name:"eval",
-                aliases: ["eval"],
-                category:'dev',
-                description:"send js code ",
-                cooldown: 1,
-                usage: '[code_to_test]',
-                roles: true,
-                args: true
-            },
-            CONFIG:{
-                name:"config",
-                aliases: ["config"],
-                category:'dev',
-                description:"modification of the db",
                 cooldown: 5,
-                usage: '[key] [value]',
+                usage: "[user]",
                 roles: true,
                 args: true
             }
@@ -77,12 +65,22 @@ const MESSAGES = {
         MANAGEMENT:{
             CHANNEL:{
                 name:"channel",
-                aliases: ["channel"],
+                aliases: ["channel", "c"],
                 category:'management',
                 description:"create a channel for a user",
                 cooldown: 5,
                 usage:'[@user]',
                 roles: true,
+                args: true
+            },
+            SCORE:{
+                name:"score",
+                aliases: ["score", "s"],
+                category:'management',
+                description:"add score using activities",
+                cooldown: 5,
+                usage:'[activity_name] {occurrence}',
+                roles: false,
                 args: true
             },
             ADDPLAYER:{
@@ -95,57 +93,119 @@ const MESSAGES = {
                 roles: true,
                 args: true
             },
+            ADDACTIVITY:{
+                name:"addactivity",
+                aliases: ["addactivity"],
+                category:'management',
+                description:"Add an activity to the guild",
+                cooldown: 5,
+                usage:'[activity_name] {score}',
+                roles: true,
+                args: true
+            },
             ADDSCORE:{
                 name:"addscore",
                 aliases: ["addscore"],
                 category:'management',
-                description:"update the score of a player",
+                description:"add score to a player",
+                cooldown: 5,
+                usage:'[@user] [score]',
+                roles: true,
+                args: true
+            },
+            DELETEPLAYER:{
+                name:"deleteplayer",
+                aliases: ["deleteplayer"],
+                category:'management',
+                description:`delete a player`,
                 cooldown: 5,
                 usage:'[@user]',
                 roles: true,
                 args: true
             },
-            MINUSSCORE:{
-                name:"minusscore",
-                aliases: ["minusscore"],
+            DELETEACTIVITY:{
+                name:"deleteactivity",
+                aliases: ["deleteactivity"],
                 category:'management',
-                description:"update the score of a player",
+                description:"delete an activity",
                 cooldown: 5,
-                usage:'[@user]',
+                usage:'[activity_name]',
                 roles: true,
                 args: true
             }
         },
         SETUP:{
-            SETUPBASE:{
-                name:"setupbase",
-                aliases: ["setupbase", "setupB", "setup3"],
+            SETUP:{
+                name:"setup",
+                aliases: ["setup"],
                 category:'setup',
-                description:"setup the base channel",
-                cooldown: 5,
+                description:"setup",
+                cooldown: 10,
+                usage: '',
+                roles: false,
+                args: false
+            }
+        },
+        CONFIG:{
+            DAILYLOSS:{
+                name:"dailyloss",
+                aliases: ["dailyloss"],
+                category:'config',
+                description:"update the daily loss to a new number",
+                cooldown: 10,
+                usage: '[new_daily_loss]',
+                roles: true,
+                args: true
+            },
+            CONFIG:{
+                name:"config",
+                aliases: ["config"],
+                category:'config',
+                description:"list the config of the server",
+                cooldown: 10,
                 usage: '',
                 roles: true,
                 args: false
             },
-            SETUPCATEGORY:{
-                name:"setupcategory",
-                aliases: ["setupcategory", "setupc", "setup2"],
-                category:'setup',
-                description:"setup the category",
-                cooldown: 5,
-                usage: '',
+            IMAGE:{
+                name:"image",
+                aliases: ["image"],
+                category:'config',
+                description:"update the selected image between 1 to 4",
+                cooldown: 10,
+                usage: '[number of the image] [new_url]',
                 roles: true,
-                args: false
+                args: true
             },
-            SETUPROLE:{
-                name:"setuprole",
-                aliases: ["setuprole", "setupr", "setup1"],
-                category:'setup',
-                description:"setup the role",
-                cooldown: 5,
-                usage: '',
+            MAXSCORE:{
+                name:"maxscore",
+                aliases: ["maxscore"],
+                category:'config',
+                description:"update the max score to a new number",
+                cooldown: 10,
+                usage: '[new_max_score]',
                 roles: true,
-                args: false
+                args: true
+            },
+            DEFAULTSCORE:{
+                name:"defaultscore",
+                aliases: ["defaultscore"],
+                category:'config',
+                description:"update the default score for a new player",
+                cooldown: 10,
+                usage: '[new_default_score]',
+                roles: true,
+                args: true
+            },
+            PREFIX:{
+                name:"prefix",
+                aliases: ["prefix"],
+                category:'config',
+                description:"update the prefix",
+                cooldown: 10,
+                usage: '[new_prefix]',
+                roles: true,
+                args: true
             }
         }
     }
