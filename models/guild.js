@@ -23,19 +23,19 @@ const guildSchema = mongoose.Schema({
     },
     img1:{
         "type": String,
-        "default": 'https://i.imgur.com/oNklEOy.jpeg'
+        "default": 'https://i.imgur.com/AGRJFmF.png'
     },
     img2:{
         "type": String,
-        "default": 'https://i.imgur.com/vG1yXbG.jpeg'
+        "default": 'https://i.imgur.com/5MvDyI3.png'
     },
     img3:{
         "type": String,
-        "default": 'https://i.imgur.com/zIXZsux.jpeg'
+        "default": 'https://i.imgur.com/NkvoduG.png'
     },
     img4:{
         "type": String,
-        "default": 'https://i.imgur.com/Vf0FX2e.jpeg'
+        "default": 'https://i.imgur.com/bgdBW5W.png'
     }
 
 });

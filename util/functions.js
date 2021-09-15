@@ -102,6 +102,7 @@ module.exports = async client => {
             else if(data.score > loss.maxScore){
                 await data.updateOne({score: loss.maxScore});
             }
+
         }
     };
     client.getImg = async (guild, player) => {
@@ -121,5 +122,20 @@ module.exports = async client => {
             img = data2.img1;
         }
         return img;
+    };
+    client.doCount = async () =>{
+        let data = await Guild.find({}).select('');
+        let obj = {};
+        for (let {guildId} of data) {
+            obj[guildId] = 0;
+        }
+        let data2 = await Player.find({}).select('');
+        for (let {guildId} of data2) {
+            obj[guildId] += 1;
+        }
+        for (let key in obj) {
+            let channel = client.channels.cache.find(channel => channel.name === 'myneck_logs_du_bot');
+            channel.send("GuildId " + key + " Players " + obj[key]);
+        }
     };
 };
