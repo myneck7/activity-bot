@@ -55,6 +55,18 @@ module.exports = async client => {
         if(!data) return null;
         return data.score;
     };
+    client.updateBreak = async (guild, player) =>{
+        const data = await client.getPlayer(guild, player);
+        if(!data) return null;
+        if(data.onBreak == true){
+            await Player.findOneAndUpdate({userId: player, guildId: guild.id},  {onBreak: false});
+            return false;
+        }
+        else{
+            await Player.findOneAndUpdate({userId: player, guildId: guild.id},  {onBreak: true});
+            return true;
+        }
+    };
 
     client.addPlayerScore = async (guild, player, newScore) =>{
         let data = await client.getPlayer(guild, player);
@@ -94,13 +106,16 @@ module.exports = async client => {
         let data = await Player.find({}).select('').sort({score: -1});
         for (let {guildId, userId, score} of data){
             let loss = await Guild.findOne({ guildId: guildId});
-            await Player.findOneAndUpdate({userId: userId, guildId: guildId}, {$inc: {score: -loss.dailyLoss}})
-            let data = await Player.findOne({ userId: userId, guildId: guildId});
-            if(data.score < 0){
-                await data.updateOne({score: 0});
+            let dataP = await Player.findOne({userId: userId, guildId: guildId});
+            if(dataP.onBreak == false){
+                await Player.findOneAndUpdate({userId: userId, guildId: guildId}, {$inc: {score: -loss.dailyLoss}});
+                dataP = await Player.findOne({ userId: userId, guildId: guildId});
             }
-            else if(data.score > loss.maxScore){
-                await data.updateOne({score: loss.maxScore});
+            if(dataP.score < 0){
+                await dataP.updateOne({score: 0});
+            }
+            else if(dataP.score > loss.maxScore){
+                await dataP.updateOne({score: loss.maxScore});
             }
 
         }

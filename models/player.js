@@ -7,6 +7,18 @@ const playerSchema = mongoose.Schema({
     score: {
         "type": Number,
         "default": 500
+    },
+    onBreak:{
+        "type": Boolean,
+        "default": false
+    },
+    exp:{
+        "type": Number,
+        "default": 0
+    },
+    level:{
+        "type":Number,
+        "default":0
     }
 });
 

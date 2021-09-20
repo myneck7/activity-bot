@@ -85,7 +85,7 @@ const MESSAGES = {
             },
             ADDPLAYER:{
                 name:"addplayer",
-                aliases: ["addplayer"],
+                aliases: ["addplayer", "ap"],
                 category:'management',
                 description:"Add a player to the guild",
                 cooldown: 5,
@@ -93,9 +93,19 @@ const MESSAGES = {
                 roles: true,
                 args: true
             },
+            BREAK:{
+                name:"break",
+                aliases: ["break", "b"],
+                category:'management',
+                description:"put a player on break",
+                cooldown: 5,
+                usage:'[@user]',
+                roles: true,
+                args: true
+            },
             ADDACTIVITY:{
                 name:"addactivity",
-                aliases: ["addactivity"],
+                aliases: ["addactivity", "ac"],
                 category:'management',
                 description:"Add an activity to the guild",
                 cooldown: 5,

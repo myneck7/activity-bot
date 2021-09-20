@@ -3,23 +3,20 @@ const {MESSAGES} = require('../../util/constants');
 
 module.exports.run = async (client, message, args) => {
     try {
-        const act = args[0];
-        const score = args[1];
-        let newActivity;
-        if (score && !isNaN(score)) {
-            newActivity = {guildId: message.guild.id, activityName: act, score: score};
-        } else {
-            newActivity = {guildId: message.guild.id, activityName: act};
+        let user = message.mentions.users.first();
+        if (!user) {
+            user = message.author;
         }
-        await client.createActivity(newActivity);
+
+        let res = await client.updateBreak(message.guild, user.id);
 
         try {
             let l = message.guild.channels.cache.find(c => c.name == "logs" && c.type == "GUILD_TEXT").id;
             const embedLogs =
-                new MessageEmbed().setColor('#03c2fc')
-                    .setTitle(`${message.author.username} (${message.author.id})`)
-                    .setThumbnail(message.author.avatarURL())
-                    .setDescription(`**Action** : add an activity\n**Name** : ${act}\n**Score** : ${score}`)
+                new MessageEmbed().setColor('#fcf403')
+                    .setTitle(`${user.username} (${user.id})`)
+                    .setThumbnail(user.avatarURL())
+                    .setDescription(`**Action** : editing the break\n**Player** : ${user.username}\n**On break** : ${res}`)
                     .setTimestamp()
                     .setFooter(message.author.username, message.author.avatarURL());
             client.channels.cache.get(l).send({embeds: [embedLogs]});
@@ -33,14 +30,13 @@ module.exports.run = async (client, message, args) => {
                 new MessageEmbed().setColor('GREEN')
                     .setTitle(`${message.author.username}`)
                     .setThumbnail(message.author.displayAvatarURL())
-                    .setDescription(`**Action** : activity creation\n**Status** : Done`)
+                    .setDescription(`**Action** : edit break\n**Status** : Done`)
             ]
         });
     }
     catch (e) {
         message.reply('Couldn\'t use the command');
     }
-
 };
 
-module.exports.help = MESSAGES.COMMANDS.MANAGEMENT.ADDACTIVITY;
+module.exports.help = MESSAGES.COMMANDS.MANAGEMENT.BREAK;
