@@ -23,7 +23,7 @@ const MESSAGES = {
             },
             ACTIVITY:{
                 name:"activity",
-                aliases: ["activity"],
+                aliases: ["activity", "a"],
                 category:'misc',
                 description:"send activity list",
                 cooldown: 5,
@@ -33,7 +33,7 @@ const MESSAGES = {
             },
             LEADERBOARD:{
                 name:"leaderboard",
-                aliases: ["leaderboard"],
+                aliases: ["leaderboard", "l"],
                 category:'misc',
                 description:"send player list",
                 cooldown: 5,
@@ -53,7 +53,7 @@ const MESSAGES = {
             },
             USERINFO:{
                 name:"userinfo",
-                aliases: ["userinfo"],
+                aliases: ["userinfo", "u"],
                 category:'misc',
                 description:"send the user infos",
                 cooldown: 5,
@@ -115,7 +115,7 @@ const MESSAGES = {
             },
             ADDSCORE:{
                 name:"addscore",
-                aliases: ["addscore"],
+                aliases: ["addscore", "as"],
                 category:'management',
                 description:"add score to a player",
                 cooldown: 5,
@@ -125,7 +125,7 @@ const MESSAGES = {
             },
             DELETEPLAYER:{
                 name:"deleteplayer",
-                aliases: ["deleteplayer"],
+                aliases: ["deleteplayer", "dp"],
                 category:'management',
                 description:`delete a player`,
                 cooldown: 5,
@@ -135,7 +135,7 @@ const MESSAGES = {
             },
             DELETEACTIVITY:{
                 name:"deleteactivity",
-                aliases: ["deleteactivity"],
+                aliases: ["deleteactivity", "da"],
                 category:'management',
                 description:"delete an activity",
                 cooldown: 5,
@@ -199,7 +199,7 @@ const MESSAGES = {
             },
             DEFAULTSCORE:{
                 name:"defaultscore",
-                aliases: ["defaultscore"],
+                aliases: ["defaultscore", "default"],
                 category:'config',
                 description:"update the default score for a new player",
                 cooldown: 10,

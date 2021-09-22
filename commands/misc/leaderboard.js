@@ -9,14 +9,16 @@ module.exports.run = async (client, message) => {
         for (let value of Object.entries(act)) {
             value = String(value);
             value = value.split('\'');
-            let test = value[2].split(' ');
+            let score = value[2].split(':');
+            let scoreFinal = score[1].split(',');
             let username = client.users.cache.get(value[1]);
             if (!username) {
                 listUser += value[1] + "\n";
             } else {
                 listUser += username.username + "\n";
             }
-            listScore += test[2] + "\n";
+            console.log(scoreFinal[0]);
+            listScore += scoreFinal[0] + "\n";
         }
         if (listUser == "") {
             listUser = "null";

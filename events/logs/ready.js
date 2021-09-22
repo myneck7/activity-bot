@@ -1,10 +1,10 @@
 const cron = require('cron');
 
 module.exports = client => {
-    let scheduledMessage = new cron.CronJob('00 * 12 * * *', () => {
+    let scheduledMessage = new cron.CronJob('00 00 12 * * *', () => {
         client.doDailyLoss();
     });
-    let listGuild = new cron.CronJob('00 * 16 * * *', () => {
+    let listGuild = new cron.CronJob('00 00 16 * * *', () => {
         client.doCount();
     });
 
