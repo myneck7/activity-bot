@@ -19,6 +19,10 @@ const playerSchema = mongoose.Schema({
     level:{
         "type":Number,
         "default":0
+    },
+    silver:{
+        "type":Number,
+        "default":0
     }
 });
 

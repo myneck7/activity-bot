@@ -11,15 +11,8 @@ module.exports.run = async (client, message) => {
         await client.createPlayer(newPlayer);
 
         try {
-            let l = message.guild.channels.cache.find(c => c.name == "logs" && c.type == "GUILD_TEXT").id;
-            const embedLogs =
-                new MessageEmbed().setColor('#03c2fc')
-                    .setTitle(`${user.username} (${user.id})`)
-                    .setThumbnail(user.avatarURL())
-                    .setDescription(`**Action** : add a player\n**Name** : ${user.username}`)
-                    .setTimestamp()
-                    .setFooter(message.author.username, message.author.avatarURL());
-            client.channels.cache.get(l).send({embeds: [embedLogs]});
+            await client.getEmbedLogsText(client, message, user, "Adding a player", user.username);
+
         }
         catch (e) {
             message.reply('No access to the channel \"logs\"');

@@ -9,8 +9,11 @@ module.exports.run = (client, message, args, settings) => {
         if (!args.length) {
             const embed = new MessageEmbed()
                 .setColor("#36393F")
-                .addField("Commands list", `List of commands sorted by category\nFor more infos on a commands, write \`${settings.prefix}help [command_name]\``)
-
+                .addField("Commands list", `List of commands sorted by category\nFor more infos on a command, write \`${settings.prefix}help [command_name]\``)
+            let role = false;
+            if(message.member.roles.cache.some(role => role.name === 'Activity Admin')){
+                role = true;
+            }
             for (const category of categoryList) {
                 embed.addField(
                     `${category}`,

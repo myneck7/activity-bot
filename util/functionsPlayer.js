@@ -56,4 +56,26 @@ module.exports = async client => {
             }
         }
     }
+    client.addSilver = async (guild, player, silver) =>{
+        let data = await client.getPlayer(guild, player);
+        if(data != null) {
+            if(data.silver == 0){
+                data.updateOne(
+                    {silver : silver },
+                    {multi:true},
+                    function(err, numberAffected){
+                    });
+            }
+            else{
+                await data.updateOne({$inc: {silver: silver}});
+            }
+
+            data = await client.getPlayer(guild, player);
+            if (data.silver < 0) {
+
+                await data.updateOne({silver: 0});
+            }
+
+        }
+    }
 };

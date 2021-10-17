@@ -9,17 +9,16 @@ module.exports.run = async (client, message, args) => {
         }
 
         let res = await client.updateBreak(message.guild, user.id);
-
+        let display;
+        if(res){
+            display = "On a break"
+        }
+        else{
+            display = "Available"
+        }
         try {
-            let l = message.guild.channels.cache.find(c => c.name == "logs" && c.type == "GUILD_TEXT").id;
-            const embedLogs =
-                new MessageEmbed().setColor('#fcf403')
-                    .setTitle(`${user.username} (${user.id})`)
-                    .setThumbnail(user.avatarURL())
-                    .setDescription(`**Action** : editing the break\n**Player** : ${user.username}\n**On break** : ${res}`)
-                    .setTimestamp()
-                    .setFooter(message.author.username, message.author.avatarURL());
-            client.channels.cache.get(l).send({embeds: [embedLogs]});
+            await client.getEmbedLogsQuantity(client, message, user, "Putting on break", display);
+
         }
         catch (e) {
             message.reply('No access to the channel \"logs\"');

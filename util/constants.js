@@ -73,6 +73,16 @@ const MESSAGES = {
                 roles: true,
                 args: true
             },
+            ADDSILVER:{
+                name:"addsilver",
+                aliases: ["addsilver", "silver"],
+                category:'management',
+                description:"Update the silver of a player",
+                cooldown: 5,
+                usage:'[@user] [silver]',
+                roles: true,
+                args: true
+            },
             SCORE:{
                 name:"score",
                 aliases: ["score", "s"],

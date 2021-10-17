@@ -1,7 +1,7 @@
 const {MessageEmbed} = require("discord.js");
 const {MESSAGES} = require('../../util/constants');
 
-module.exports.run = (client, message, args) => {
+module.exports.run = async (client, message, args) => {
     try {
         let c = message.guild.channels.cache.find(c => c.name == "activity" && c.type == "GUILD_CATEGORY");
         let role = message.guild.roles.cache.find(role => role.name === "Activity Admin");
@@ -9,7 +9,7 @@ module.exports.run = (client, message, args) => {
 
         if (!user) return;
 
-        message.guild.channels.create(user.username, {
+        await message.guild.channels.create(user.username, {
             parent: c,
             permissionOverwrites: [
                 {
@@ -27,17 +27,9 @@ module.exports.run = (client, message, args) => {
             ]
         });
         try {
-            let l = message.guild.channels.cache.find(c => c.name == "logs" && c.type == "GUILD_TEXT").id;
-            const embedLogs =
-                new MessageEmbed().setColor('#03c2fc')
-                    .setTitle(`${user.username} (${user.id})`)
-                    .setThumbnail(user.avatarURL())
-                    .setDescription(`**Action** : channel creation`)
-                    .setTimestamp()
-                    .setFooter(message.author.username, message.author.avatarURL());
-            client.channels.cache.get(l).send({embeds: [embedLogs]});
-        }
-        catch (e) {
+            await client.getEmbedLogsQuantity(client, message, user, "Channel created", user.username);
+
+        } catch (e) {
             message.reply('No access to the channel \"logs\"');
         }
 
@@ -49,8 +41,7 @@ module.exports.run = (client, message, args) => {
                     .setDescription(`**Action** : channel creation\n**Status** : Done`)
             ]
         });
-    }
-    catch (e) {
+    } catch (e) {
         message.reply('Couldn\'t use the command');
     }
 };

@@ -14,15 +14,8 @@ module.exports.run = async (client, message, args) => {
         await client.createActivity(newActivity);
 
         try {
-            let l = message.guild.channels.cache.find(c => c.name == "logs" && c.type == "GUILD_TEXT").id;
-            const embedLogs =
-                new MessageEmbed().setColor('#03c2fc')
-                    .setTitle(`${message.author.username} (${message.author.id})`)
-                    .setThumbnail(message.author.avatarURL())
-                    .setDescription(`**Action** : add an activity\n**Name** : ${act}\n**Score** : ${score}`)
-                    .setTimestamp()
-                    .setFooter(message.author.username, message.author.avatarURL());
-            client.channels.cache.get(l).send({embeds: [embedLogs]});
+            await client.getEmbedLogsQuantity(client, message, user, "Adding an activity", score);
+
         }
         catch (e) {
             message.reply('No access to the channel \"logs\"');

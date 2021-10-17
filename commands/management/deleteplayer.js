@@ -7,15 +7,8 @@ module.exports.run = async (client, message) => {
         await client.deletePlayer(message.guild.id, user.id);
 
         try {
-            let l = message.guild.channels.cache.find(c => c.name == "logs" && c.type == "GUILD_TEXT").id;
-            const embedLogs =
-                new MessageEmbed().setColor('#2c29d6')
-                    .setTitle(`${user.username} (${user.id})`)
-                    .setThumbnail(user.avatarURL())
-                    .setDescription(`**Action** : delete a player\n**Name** : ${user.username}`)
-                    .setTimestamp()
-                    .setFooter(message.author.username, message.author.avatarURL());
-            client.channels.cache.get(l).send({embeds: [embedLogs]});
+            await client.getEmbedLogsQuantity(client, message, user, "Delete a player", user.username);
+
         }
         catch (e) {
             message.reply('No access to the channel \"logs\"');
