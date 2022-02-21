@@ -1,11 +1,10 @@
 # activity-bot
-repo of the activity bot used on Discord
 
-command list :
-
+## command list :
 
 
-config (available for bot admin):
+
+### config (available for bot admin):
 
 -config : list the parameter of the bot on the server
 
@@ -21,7 +20,7 @@ config (available for bot admin):
 
 
 
-management (available for bot admin):
+### management (available for bot admin):
 
 -addactivity : add an activity to the list
 
@@ -41,7 +40,7 @@ management (available for bot admin):
 
 
 
-misc (for everyone):
+### misc (for everyone):
 
 -activity : display the list of activities
 
@@ -57,6 +56,6 @@ misc (for everyone):
 
 
 
-setup (for anyone how have the necessary perms):
+### setup (for anyone how have the necessary perms):
 
 -setup : setup the roles and channels for the bot
